@@ -56,7 +56,7 @@ if (isset($dataToView["data"])) {
                 <label>Imagen</label>
 
 
-                <input class="form-control" type="file" id="fichero" name="fichero"  onchange="preview()">
+                <input class="form-control" type="file" id="fichero" name="fichero"  accept=".jpg,.jpeg,.webp,.png" onchange="preview()">
 
                 <img id="frame" src="<?php echo $img ?>" class="img-fluid" width="100px" />
             </div>

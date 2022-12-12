@@ -81,15 +81,12 @@ class NotaServicio {
         return $exito;
     }
 
-    private function gestionarFichero(array $fileInfoArray, string $imgOld, Nota $notaToVista): Nota {
+    private function gestionarFichero(array $fileInfoArray,
+            string $imgOld, Nota $notaToVista): Nota {
 
 
         if ($fileInfoArray["error"] === UPLOAD_ERR_OK) {
             $exito = false;
-//Sabemos que se ha añadido un fichero
-//borramos fichero antiguo solo si es diferente de cadena vacía. Si no estaremos intentando borrar el directorio files
-            if ($imgOld !== "" && file_exists($this->getFilesPath($imgOld)))
-                unlink($this->getFilesPath($imgOld));
 
             $destino = $this->crearRutaNombreFichero($notaToVista->getId(), $fileInfoArray["name"]);
             $origen = $fileInfoArray["tmp_name"];
@@ -98,6 +95,11 @@ class NotaServicio {
 //Si hubo éxito en el movimiento del fichero
                 $notaToVista->setImagePath($this->getNombreFichero($destino));
                 $exito = $exito && $this->repository->updateNota($notaToVista);
+                //Sabemos que se ha añadido un fichero
+               //borramos fichero antiguo solo si es diferente de cadena vacía. Si no estaremos intentando borrar el directorio files
+
+                if ($imgOld !== "" && file_exists($this->getFilesPath($imgOld)))
+                    unlink($this->getFilesPath($imgOld));
             }
 
             if (!$exito) {
@@ -107,7 +109,7 @@ class NotaServicio {
         }
         return $notaToVista;
     }
-    
+
     //Dado el id y nombre, construye la ruta relativa al fichero
     private function crearRutaNombreFichero(string $id, string $nombreFichero): string {
 //  $ruta_fichero_start = dirname(__FILE__, 3) . self::RUTA_FICHEROS_CONST;
@@ -123,8 +125,6 @@ class NotaServicio {
         }
         return $exito;
     }
-
-
 
 //Dada una ruta, obtiene la última parte de la ruta: El nombre del fichero con su extensión
     private function getNombreFichero(string $path): string {
