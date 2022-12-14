@@ -1,5 +1,5 @@
 <?php
-$id = $title = $contenido = $img = "";
+$id = $title = $contenido = $img = $comentario = "";
 if (isset($dataToView["data"])) {
     $nota = $dataToView["data"];
 
@@ -11,6 +11,10 @@ if (isset($dataToView["data"])) {
     }
     if ($nota->getContenido() !== null) {
         $contenido = $nota->getContenido();
+    }
+
+    if($nota->getComentario() !== null) {
+        $comentario = $nota->getComentario();
     }
 
     if ($nota->getImagePath() !== "") {
@@ -50,6 +54,10 @@ if (isset($dataToView["data"])) {
             <div class="form-group mb-2">
                 <label>Contenido</label>
                 <textarea class="form-control" style="white-space: pre-wrap;" name="content"><?php echo $contenido; ?></textarea>
+            </div>
+            <div class="form-group mb-2">
+                <label>Comentario</label>
+                <textarea class="form-control" style="white-space: pre-wrap;" name="comentario"><?php echo $comentario; ?></textarea>
             </div>
 
             <div class="form-group mb-2">

@@ -17,13 +17,15 @@ class Nota implements JsonSerializable {
     private ?int $id;
     private string $titulo;
     private string $contenido;
+    private string $comentario;
   
     private string $imagePath="";
 
-    public function __construct(?int $id = null, String $titulo = "", String $contenido = "") {
+    public function __construct(?int $id = null, String $titulo = "", String $contenido = "", String $comentario = "") {
         $this->id = $id;
         $this->titulo = $titulo;
         $this->contenido = $contenido;
+        $this->comentario = $comentario;
     }
 
     public function getId(): ?int {
@@ -58,13 +60,22 @@ class Nota implements JsonSerializable {
         $this->imagePath = $imagePath;
     }
 
+    public function getComentario(): String {
+        return $this->comentario;
+    }
+
+    public function setComentario(String $comentario): void {
+        $this->comentario = $comentario;
+    }
 
     public function jsonSerialize() {
         //Especificamos qué propiedades no públicas queremos que pasen a formar parte del objeto JSON
+        print_r($this);
         return array(
             'id' => $this->id,
             'titulo' => $this->titulo,
             'contenido' => $this->contenido,
+            'comentario' => $this->comentario,
             'imagePath' => $this->imagePath
         );
     }

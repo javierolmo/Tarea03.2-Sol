@@ -70,6 +70,7 @@ class NotaRepository implements INotaRepository {
                 $nota->setTitulo($notaToUpdate->getTitulo());
                 $nota->setContenido($notaToUpdate->getContenido());
                 $nota->setImagePath($notaToUpdate->getImagePath());
+                $nota->setComentario($notaToUpdate->getComentario());
             }
         }
 

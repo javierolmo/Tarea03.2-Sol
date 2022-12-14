@@ -55,11 +55,15 @@ class NotaController {
         if (isset($_POST["content"])) {
             $content = $_POST["content"];
         }
+        if (isset($_POST["comentario"])) {
+            $comentario = $_POST["comentario"];
+        }
         
         $nota = new Nota();
         $nota->setTitulo($title);
         $nota->setContenido($content);
         $nota->setId($id);
+        $nota->setComentario($comentario);
         
          $notaGuardada = $this->notaServicio->save($nota, $_FILES["fichero"]);
         //para saber si ha habido error o no
